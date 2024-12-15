@@ -23,3 +23,9 @@ Examples:
 
 `--- Reflection Below This Line ---`
 
+While the functions ended up being fairly easy to write, the final streamlit application was definitely more difficult. I kept getting a lot of very tedious errors that would keep me stuck for a long time. One of the more annoying ones was an error that said that dataframe had no attribut "unique". I soon realized this had to do with using multiselectors intead of a selectbox for the filter, which quickly solved the problem. (Didn't have time to look further into this, but I would like to know more about why this happened)
+
+Something I did appreciate, though, was how this program taught me to consider the format or contents of the output of various streamlit functions. For instance, I was having trouble grabbing the extension from the file I input--I kept getting an error about the filename lacking an attribute--until i decided to print the contents of the file_input and realized putting this variable in the get_file_extension name was not giving the function the proper file name format and thus the function was unable to work as intended.
+
+Overall, though it was challenging it helped warm me up to pandas and to remind me of how to correctly filter a dataframe to get the specific output, that is filtered data, that I want. 
+
