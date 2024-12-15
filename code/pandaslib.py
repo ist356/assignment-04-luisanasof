@@ -3,28 +3,35 @@ A Library of useful pandas helper functions
 SOLUTION FILE!!!!
 '''
 import pandas as pd
+import requests
 
 def get_column_names(df : pd.DataFrame) -> list[str]:
     '''
     Get all column names of a pandas dataframe df
     Returns the names as a list of string
     '''
-    pass # todo: replace this line and add your code
-
+    columns = df.columns
+    columns_list = columns.to_list()
+    return columns_list
 
 def get_columns_of_type(df : pd.DataFrame, numpy_type: any) -> list[str]:
     '''
     Return the column names of a pandas dataframe only when 
     the values in the column match the numpy_type
     '''
-    pass # todo: replace this line and add your code
+    colnames = []
+    for col in df.columns: 
+        if df[col].dtype == numpy_type:
+            colnames.append(col)
 
+    return colnames 
 
 def get_unique_values(df : pd.DataFrame, column_name: str) -> list:
     '''
     Get a list of unique values of a column in a pandas dataframe
     '''
-    pass # todo: replace this line and add your code
+    unique_values= df[column_name].unique()
+    return unique_values.tolist()
 
 def get_file_extension(file_path : str) -> str:
     '''
@@ -34,8 +41,10 @@ def get_file_extension(file_path : str) -> str:
     'countries.json' -> 'json'
 
     '''
-    pass # todo: replace this line and add your code
+    ext = file_path.split(".")[1]
+    return ext
 
+import pandas as pd
 def load_file(file_path: str, ext: str) -> pd.DataFrame:
     '''
     Load a file into a pandas dataframe assumed the file type from the extension
@@ -44,8 +53,16 @@ def load_file(file_path: str, ext: str) -> pd.DataFrame:
     - when csv assume first row is header
     - when json assume record-oriented data
     '''
-    pass # todo: replace this line and add your code
-
+    if ext == "csv":
+        return pd.read_csv(file_path)
+    elif ext == "json":
+        return pd.read_json(file_path, orient='records')
+    elif ext == "xlsx": 
+        return pd.read_excel(file_path)
+    else: 
+        return print("File extension not supported")
+  
+#is_dataframe prints T/F statement
 if __name__ == '__main__':
     df = pd.DataFrame({ 
         "name": ["Alice", "Bob", "Chris", "Dee", "Eddie", "Fiona"],
@@ -63,9 +80,20 @@ if __name__ == '__main__':
     print(f"Float64 Columns: {cols}")
     unique = get_unique_values(df, 'state')
     print(f"Unique States: {unique}")
+    
 
 
+#load file: 
+    path_csv = '/Users/luisanasof/Desktop/Classes: School Docs/Fall 2024/IST356/assignment-04-luisanasof/data/car_owners.csv'
+    path_json = '/Users/luisanasof/Desktop/Classes: School Docs/Fall 2024/IST356/assignment-04-luisanasof/data/car_owners.json'
+    path_xlsx = '/Users/luisanasof/Desktop/Classes: School Docs/Fall 2024/IST356/assignment-04-luisanasof/data/car_owners.xlsx'
+    
 
+    load_file(path_csv, 'csv')
+    load_file(path_json, 'json')
+    load_file(path_xlsx, 'xlsx')
 
+    ext = get_file_extension(path_csv)
+    print(ext)
 
     # solution pandaslib.py
